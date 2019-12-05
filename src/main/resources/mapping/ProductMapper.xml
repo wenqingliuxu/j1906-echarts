@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.j1906.mapper.ProductMapper">
+    <resultMap id="productMap" type="com.qf.j1906.po.Product">
+    <id property="pdcId" column="pdc_id"></id>
+        <result column="pdc_name" property="pdcName"></result>
+        <result column="pdc_risk" property="pdcRisk"></result>
+        <result column="bought_num" property="boughtNum"></result>
+        <result column="pdc_deadline" property="pdcDeadline"></result>
+        <result column="bright_spot" property="brightSpot"></result>
+        <result column="trading_rules" property="tradingRules"></result>
+        <result column="bearing_rules" property="bearingRules"></result>
+        <result column="pdc_rate" property="pdcRate"></result>
+        <result column="pdc_date" property="pdcDate"></result>
+    </resultMap>
+    <select id="findProductById" resultMap="productMap">
+        select * from
+        product p,
+        interest_rate ir
+        where p.pdc_id=ir.pdc_id
+        and p.pdc_id=#{id}
+    </select>
+</mapper>

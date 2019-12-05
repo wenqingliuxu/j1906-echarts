@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<h2>ECharts</h2>
+<div id="main" style="width: 600px;height:400px"></div>
+
+<!--        <input type="hidden" th:value="${#dates.format(dateList,'yyyy-MM-dd ')}" id="date"></input>-->
+        <input type="hidden" th:value="${dateList}" id="date"></input>
+        <input type="hidden" th:value="${rateList}" id="point"></input>
+<!--        <input type="hidden" th:value="${products}" id="products">-->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+<!--<script type="text/javascript"-->
+<!--        src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById("main"));
+    var date = $("#date").val().replace("[","").replace("]","").split(",");
+    var point = $("#point").val().replace("[","").replace("]","").split(",");
+    console.log(point);
+    console.log(date);
+    var option = {
+        title: {
+            text: '产品利率'
+        },
+        tootip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['利率','日期']
+        },
+        xAxis: {
+            type: 'category',
+            name: '日期',
+            data: date,
+            axisLabel : {//坐标轴刻度标签的相关设置。
+                interval:0,
+                rotate:"45"
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: '利率',
+        },
+        series: [{
+            data: point,
+            type: 'line'
+        }]
+    };
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>
